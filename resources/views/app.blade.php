@@ -8,7 +8,9 @@
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <link rel="icon" href="https://bioinformatics.um6p.ma/Mentalome/favicon.svg">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" async></script>
 
         <!-- Scripts -->
         @routes
