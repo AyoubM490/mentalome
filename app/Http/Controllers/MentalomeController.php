@@ -48,7 +48,7 @@ class MentalomeController extends Controller
         $sras = DB::table('apis')->latest()->select('SRA')->first();
 
         if ($experiments?->experiment === 'All') {
-            $experiments = DB::table('mentalomes')->select('experiment')->distinct()->get()->pluck('experiment');
+            $experiments = DB::table('mentalomes')->select('experiment')->distinct()->get()->pluck('experiment')->toArray();
         }
 
         if ($sras?->SRA === 'All') {
@@ -57,11 +57,12 @@ class MentalomeController extends Controller
             $sras = [$sras?->SRA];
         }
 
-//        dd($experiments->experiment);
-        if ($experiments->experiment) {
-            $values = DB::table('mentalomes')->whereIn('gene_ids', $gene_ids)->whereIn('experiment', [$experiments->experiment])->whereIn('sra', $sras)->where('disease', '=', $disease?->disease);
-        } else {
+//        dd(DB::table('mentalomes')->whereIn('gene_ids', $gene_ids)->whereIn('experiment', [$experiments->experiment])->whereIn('sra', $sras)->where('disease', '=', $disease?->disease));
+//        $experiments = is_array($experiments) ? $experiments : $experiments->toArray();
+        if (is_array($experiments)) {
             $values = DB::table('mentalomes')->whereIn('gene_ids', $gene_ids)->whereIn('experiment', $experiments)->whereIn('sra', $sras)->where('disease', '=', $disease?->disease);
+        } else {
+            $values = DB::table('mentalomes')->whereIn('gene_ids', $gene_ids)->whereIn('experiment', [$experiments->experiment])->whereIn('sra', $sras)->where('disease', '=', $disease?->disease);
         }
 
         return $values;

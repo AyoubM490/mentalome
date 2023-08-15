@@ -6,8 +6,6 @@ import SingleSelect from "@/Components/SingleSelect.vue";
 import MentalomeLayout from "@/Layouts/MentalomeLayout.vue";
 import {router} from "@inertiajs/vue3";
 import Abbreviation from "@/Components/Abbreviation.vue";
-import Dropdown from "@/Components/Dropdown.vue";
-import DropdownLink from "@/Components/DropdownLink.vue";
 
 const props = defineProps({
   selected_gene_ids: {
@@ -79,8 +77,8 @@ const send = async () => {
     method: 'post',
     data: formData,
     replace: false,
-    preserveState: false,
-    preserveScroll: false,
+    preserveState: true,
+    preserveScroll: true,
     only: [],
     headers: {},
     errorBag: null,
@@ -274,14 +272,31 @@ function drawChart() {
   </MentalomeLayout>
 
   <MentalomeLayout title="Heatmap">
-    <div id="chart-div" class="ml-24" style="max-width: 100%; height: 611px;"></div>
+    <div class="mx-grouping flex">
+      <div class="h-3 w-full mx-auto" :class="{'ct': abbreviation['Abbreviation'] === 'CT', 'pt': abbreviation['Abbreviation'] === 'PT'}" v-for="abbreviation in props.abbreviations" :key="abbreviation"></div>
+    </div>
+    <div id="chart-div" class="ml-24" style="max-width: 100vw; height: 611px;"></div>
     <hr class="mx-8"/>
     <h2 class="mt-8 px-8 font-bold text-xl">Abbreviation:</h2>
-    <abbreviation v-for="abbreviation in props.abbreviations" :key="abbreviation" :abbreviation="abbreviation['Abbreviation']" />
+    <abbreviation v-for="abbreviation in props.abbreviations" :key="abbreviation"
+                  :abbreviation="abbreviation['Abbreviation']"/>
   </MentalomeLayout>
 </template>
 
 <style scoped>
+
+.mx-grouping {
+  margin-right: 11rem;
+  margin-left: 10.4rem;
+}
+
+.ct {
+  background-color: rgb(86, 189, 137);
+}
+
+.pt {
+  background-color: rgb(110, 133, 183);
+}
 
 .h2 {
   font-size: 2rem;

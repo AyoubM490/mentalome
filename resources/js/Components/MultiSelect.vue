@@ -50,7 +50,7 @@ let selectedTags = ref(selectedGeneIdsFresh)
 
 let landmark = ref(null);
 
-let {items: options, loadMoreItems} = useInfiniteScroll('gene_ids', landmark)
+let {items: options, loadMoreItems} = useInfiniteScroll('gene_ids_search', landmark)
 options = toRaw(options.value)?.map(option => option.gene_ids)
 
 const moveOptionToSelectedTags = (option) => {

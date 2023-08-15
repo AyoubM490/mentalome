@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('mentalomes', function (Blueprint $table) {
             $table->id();
-            $table->string('gene_ids');
-            $table->integer('value');
-            $table->string('SRA');
-            $table->string('Abbreviation');
-            $table->string('experiment');
-            $table->string('disease');
+            $table->string('gene_ids')->index();
+            $table->integer('value')->index();
+            $table->string('SRA')->index();
+            $table->string('Abbreviation')->index();
+            $table->string('experiment')->index();
+            $table->string('disease')->index();
             $table->timestamps();
         });
     }
